@@ -53,6 +53,7 @@ void Worker::read_job(){
         sendLogs();
         number_of_operations--;
     }
+    emit jobs_done();
 }
 
 /* Слот для записи в стек
@@ -63,6 +64,8 @@ void Worker::write_job(){
         sendLogs();
         number_of_operations--;
     }
+    emit jobs_done();
+
 }
 
 

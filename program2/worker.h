@@ -34,6 +34,9 @@ public slots:
 private slots:
   void sendLogs(); // отправить логи по TCP
 
+signals:
+  void jobs_done();
+
 private:
   static QMutex mutex;
   static QWaitCondition waitcond;

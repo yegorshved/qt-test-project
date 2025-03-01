@@ -4,6 +4,7 @@
 Controller::Controller(){
     connect(&udp, &Udp::message_received, this, &Controller::handle_message);
     udp.receive_message();
+
 }
 
 Controller::~Controller() {
@@ -44,7 +45,8 @@ void Controller::start_jobs() {
     consumer = new Worker();
     producer_thread = new QThread();
     consumer_thread = new QThread();
-
+    connect(consumer, &Worker::jobs_done, this, &Controller::stop_jobs);
+    connect(producer, &Worker::jobs_done, this, &Controller::stop_jobs);
     qDebug() << "[start_jobs] Moving Workers to Threads";
     producer->moveToThread(producer_thread);
     consumer->moveToThread(consumer_thread);
